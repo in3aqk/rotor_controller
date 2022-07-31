@@ -10,10 +10,13 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    rotor.cpp
 
 HEADERS += \
-    mainwindow.h
+    config.h \
+    mainwindow.h \
+    rotor.h
 
 FORMS += \
     mainwindow.ui
@@ -22,3 +25,8 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+LIBS += -L$$PWD/../libusb-MinGW-x64/lib/ -llibusb-1.0.dll
+
+INCLUDEPATH += $$PWD/../libusb-MinGW-x64/include/libusb-1.0
+DEPENDPATH += $$PWD/../libusb-MinGW-x64/include/libusb-1.0
