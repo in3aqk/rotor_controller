@@ -2,7 +2,6 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "rotor.h"
 #include <QDebug>
 
 QT_BEGIN_NAMESPACE

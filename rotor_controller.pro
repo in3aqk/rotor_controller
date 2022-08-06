@@ -15,8 +15,11 @@ SOURCES += \
 
 HEADERS += \
     config.h \
+    hiddata.h \
     mainwindow.h \
-    rotor.h
+    rotor.h \
+    usb_relay_device.h \
+    usb_relay_hw.h
 
 FORMS += \
     mainwindow.ui
@@ -26,7 +29,14 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-LIBS += -L$$PWD/../libusb-MinGW-x64/lib/ -llibusb-1.0.dll
+#LIBS += -L$$PWD/../libusb-MinGW-x64/lib/ -llibusb-1.0.dll
+LIBS += -L$$PWD/../lib/ -lusb_relay_device
 
-INCLUDEPATH += $$PWD/../libusb-MinGW-x64/include/libusb-1.0
-DEPENDPATH += $$PWD/../libusb-MinGW-x64/include/libusb-1.0
+#INCLUDEPATH += $$PWD/../libusb-MinGW-x64/include/libusb-1.0
+#DEPENDPATH += $$PWD/../libusb-MinGW-x64/include/libusb-1.0
+
+#win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../lib/ -lusb_relay_device
+#else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../lib/ -lusb_relay_deviced
+
+INCLUDEPATH += $$PWD/.
+DEPENDPATH += $$PWD/.

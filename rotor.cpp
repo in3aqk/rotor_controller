@@ -1,57 +1,47 @@
 
 #include "config.h"
 #include "rotor.h"
+#include "usb_relay_device.h"
 #include <qdebug.h>
+#include <QThread>
+
+/*
+ * USES:
+ * https://github.com/pavel-a/usb-relay-hid/tree/usb-relay-lib_v2.1
+ */
+
+intptr_t handle;
+
 
 Rotor::Rotor()
 {
-    qDebug() << "init rotot";
-    int r = libusb_init(NULL);
-    if (r < 0)
-    {
-        qErrnoWarning("ERROR: failed to initialize libusb (r = %d)\n", r);
-    } else {
-        this->listDevices();
+    qInfo() << "init rotor";
+    int res = usb_relay_init();
+    qInfo() << "init" << res;
+    if (res == 0){
+       bool found = initBoard();
     }
 }
 
+/**
+ * Detect if a 2 relay module is present
+ * @brief Rotor::is_present
+ * @return bool true false
+ */
+bool Rotor::initBoard(){
+    pusb_relay_device_info_t device = usb_relay_device_enumerate();
+    qInfo() << device->serial_number;
+    if (device->type == 2 && strcmpi(device->serial_number,"HURTM")==0){
+        qInfo() << "Two relays module found!";
+        handle = usb_relay_device_open(device);
+        usb_relay_device_open_one_relay_channel(handle,1);
+        QThread::sleep(10);
+        usb_relay_device_close_one_relay_channel(handle,1);
 
-void Rotor::listDevices()
-{
-    libusb_device **list;
-    ssize_t cnt = libusb_get_device_list(NULL, &list);
-    if (cnt < 0)
-    {
-        qErrnoWarning("ERROR: failed to get device list (cnt = %d)\n", cnt);
-        return;
-    }
-    boolean found = false;
-    for (ssize_t i = 0; i < cnt; i++) {
-        libusb_device *dev = list[i];
-        struct libusb_device_descriptor desc;
-        int r = libusb_get_device_descriptor(dev, &desc);
-        if (r < 0){
-            qErrnoWarning("ERROR: failed to get device descriptor (r = %d)\n", r);
-
-        }
-        else{
-
-            if (desc.idVendor == VENDOR_ID && desc.idProduct == DEVICE_ID){
-                found = true;
-                break;
-            }
-
-            //qInfo() << desc.idVendor << desc.iProduct << desc.bDeviceProtocol << desc.bDeviceClass;
-
-        }
-    }
-
-    if (found) {
-        qInfo() << "Relais Board found";
+        return true;
     } else {
-        qInfo() << "Relais Board not found";
+        qInfo() << "Relay module not found";
+        return false;
     }
-
-
 }
 
