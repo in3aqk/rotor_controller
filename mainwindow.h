@@ -3,6 +3,12 @@
 
 #include <QMainWindow>
 #include <QDebug>
+#include "rotor.h"
+
+#define DIRECTION_CW 1
+#define DIRECTION_CCW 2
+#define ROTATE_OFF 0
+#define ROTATE_ON 1
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -20,7 +26,16 @@ public:
     ~MainWindow();
 
 private:
+    Rotor rotor;
     Ui::MainWindow *ui;
+    void initAll();
+    void allOff();
+    void setEvents();
+    void cwPress();
+    void cwRelease();
+    void ccwPress();
+    void ccwRelease();
+
 
 };
 #endif // MAINWINDOW_H

@@ -7,19 +7,27 @@
 #define USB_RELAY_NAME_PREF       "USBRelay"  // + number
 #define USB_RELAY_ID_STR_LEN      5 /* length of "unique serial number" in the devices */
 
+
+#define DIRECTION_CW 1
+#define DIRECTION_CCW 2
+#define ROTATE_OFF 0
+#define ROTATE_ON 1
+
+#include <qglobal.h>
+
 #define printerr(fmt, ...) fprintf(stderr, fmt, ## __VA_ARGS__);
 
-#include "hiddata.h"
+//#include "hiddata.h"
 
 
 class Rotor
 {
 public:
     Rotor();
+    qint8 rotate(int direction, int rotate);
 
 protected:
     bool initBoard();
-
 
 };
 
