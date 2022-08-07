@@ -24,6 +24,8 @@ HEADERS += \
 FORMS += \
     mainwindow.ui
 
+RC_ICONS = ./resources/rocket.ico
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
@@ -40,3 +42,6 @@ LIBS += -L$$PWD/../lib/ -lusb_relay_device
 
 INCLUDEPATH += $$PWD/.
 DEPENDPATH += $$PWD/.
+
+DISTFILES += \
+    resources/rocket.ico

@@ -11,6 +11,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     Rotor rotor;
     initAll();
+
+    QSettings settings;
 }
 
 
@@ -21,6 +23,20 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::initAll(){
+
+
+    int isCalibrated = settings.value("rotor/calibrated").toInt() ;
+    qInfo()<< "Is calibrated" << isCalibrated;
+    if (isCalibrated == 0){
+        settings.setValue("rotor/calibrated",1);
+        qInfo() << settings.value("rotor/calibrated").toInt();
+    }
+
+    QCoreApplication::setOrganizationName("Mattiolo Paolo IN3AQK");
+    QCoreApplication::setOrganizationDomain("in3aqk.blogspot.com");
+    QCoreApplication::setApplicationName("Rotor controller");
+
+
     rotor.rotate(DIRECTION_CW,ROTATE_OFF);
     rotor.rotate(DIRECTION_CCW,ROTATE_OFF);
 }

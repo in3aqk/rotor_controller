@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QDebug>
+#include <QSettings>
 #include "rotor.h"
 
 #define DIRECTION_CW 1
@@ -27,6 +28,7 @@ public:
 
 private:
     Rotor rotor;
+    QSettings settings;
     Ui::MainWindow *ui;
     void initAll();
     void allOff();
