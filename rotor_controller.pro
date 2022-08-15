@@ -11,13 +11,16 @@ CONFIG += c++17
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    rotor.cpp
+    rotor.cpp \
+    rotortimer.cpp
 
 HEADERS += \
     config.h \
+    defines.h \
     hiddata.h \
     mainwindow.h \
     rotor.h \
+    rotortimer.h \
     usb_relay_device.h \
     usb_relay_hw.h
 
@@ -44,4 +47,5 @@ INCLUDEPATH += $$PWD/.
 DEPENDPATH += $$PWD/.
 
 DISTFILES += \
+    config/config.ini \
     resources/rocket.ico

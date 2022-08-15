@@ -1,15 +1,14 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+
 #include <QMainWindow>
 #include <QDebug>
 #include <QSettings>
+#include <QTimer>
 #include "rotor.h"
+#include "rotortimer.h"
 
-#define DIRECTION_CW 1
-#define DIRECTION_CCW 2
-#define ROTATE_OFF 0
-#define ROTATE_ON 1
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -24,10 +23,13 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
+
     ~MainWindow();
 
 private:
     Rotor rotor;
+    RotorTimer rotorTimer;
+
     QSettings settings;
     Ui::MainWindow *ui;
     void initAll();
@@ -37,6 +39,9 @@ private:
     void cwRelease();
     void ccwPress();
     void ccwRelease();
+
+public slots:
+    void display_heading_slot(qfloat16);
 
 
 };

@@ -3,7 +3,7 @@
 #include "rotor.h"
 #include "usb_relay_device.h"
 #include <qdebug.h>
-#include <QThread>
+#include <QTimer>
 
 /*
  * USES:
@@ -26,6 +26,8 @@ Rotor::Rotor()
     } else{
         qInfo() << "Unable to init library";
     }
+
+
 }
 
 /**
@@ -39,17 +41,6 @@ bool Rotor::initBoard(){
     if (device->type == 2 && strcmpi(device->serial_number,"HURTM")==0){
         qInfo() << "Two relays module found!";
         handle = usb_relay_device_open(device);
-        /*
-        rotate(DIRECTION_CCW,ROTATE_ON);
-        QThread::sleep(2);
-        rotate(DIRECTION_CCW,ROTATE_OFF);
-        QThread::sleep(2);
-        rotate(DIRECTION_CW,ROTATE_ON);
-        QThread::sleep(2);
-        rotate(DIRECTION_CW,ROTATE_OFF);
-        usb_relay_device_close_one_relay_channel(handle,1);
-        */
-
         return true;
     } else {
         qInfo() << "Relay module not found";
@@ -77,4 +68,5 @@ qint8 Rotor::rotate(int direction, int rotate){
     }
     return result;
 }
+
 
