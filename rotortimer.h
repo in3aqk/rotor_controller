@@ -14,11 +14,13 @@ class RotorTimer: public QObject
 public:
 
     RotorTimer();
-    float heading;
+    qfloat16 heading;
 
     void initRotationTimer();
     void timerGo(qint16);
     void timerStop();
+    int rotation_time;
+
 
 private:
     QTimer *timer;

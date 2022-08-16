@@ -22,8 +22,8 @@ void RotorTimer::initRotationTimer()
 
     // setup signal and slot
     connect(timer, SIGNAL(timeout()),this, SLOT(rotationTimerSlot()));
-    rate = (qfloat16)1;
-
+    rate = 1;
+    directionSign = 1;
 
 
 }
@@ -32,9 +32,9 @@ void RotorTimer::timerGo(qint16 direction){
     // msec
     timer->start(1000);
     if(direction == DIRECTION_CW){
-        directionSign = (qfloat16)1;
+        directionSign = 1;
     } else {
-        directionSign = (qfloat16)-1;
+        directionSign = -1;
     }
 }
 
@@ -45,7 +45,9 @@ void RotorTimer::timerStop(){
 
 
 void RotorTimer::rotationTimerSlot(){
-    heading += rate*directionSign;
+    qDebug() << "sign" << directionSign;
+    qDebug() << "rate" << rate;
+    heading = heading + rate*directionSign;
     qDebug() << "position..." << heading;
     emit display_heading_sig(heading);
 }

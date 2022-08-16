@@ -39,6 +39,10 @@ private:
     void cwRelease();
     void ccwPress();
     void ccwRelease();
+    void saveLastPosition();
+    int rotation_time;
+    int last_position;
+    int isCalibrated;
 
 public slots:
     void display_heading_slot(qfloat16);
