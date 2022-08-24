@@ -6,7 +6,6 @@
 
 RotorTimer::RotorTimer()
 {
-    qDebug() << "Constructor";
     initRotationTimer();
 }
 
@@ -14,28 +13,29 @@ RotorTimer::RotorTimer()
 
 void RotorTimer::initRotationTimer()
 {
-
-
-    qInfo()<< "Ïnit rotation timer";
     // create a timer
     timer = new QTimer(this);
-
     // setup signal and slot
     connect(timer, SIGNAL(timeout()),this, SLOT(rotationTimerSlot()));
-    rate = 1;
     directionSign = 1;
-
-
 }
 
-void RotorTimer::timerGo(qint16 direction){
-    // msec
-    timer->start(1000);
+void RotorTimer::setRate(qfloat16 rotationTime){
+    rate = rotationTime/360*1000; //Time rotate 1 degree
+    qInfo() << "setRate" << rate << rotationTime;
+}
+
+
+
+void RotorTimer::timerGo(qint16 direction){    
     if(direction == DIRECTION_CW){
         directionSign = 1;
-    } else {
+    } else{
         directionSign = -1;
     }
+    // msec
+    timer->start(rate);
+
 }
 
 void RotorTimer::timerStop(){
@@ -43,13 +43,19 @@ void RotorTimer::timerStop(){
 }
 
 
-
 void RotorTimer::rotationTimerSlot(){
-    qDebug() << "sign" << directionSign;
-    qDebug() << "rate" << rate;
-    heading = heading + rate*directionSign;
-    qDebug() << "position..." << heading;
-    emit display_heading_sig(heading);
+
+    if (heading < 360 && directionSign == 1){
+        heading = heading + directionSign;
+        emit display_heading_sig(heading);
+    }
+    else if (heading > 0 && directionSign == -1){
+        heading = heading + directionSign;
+        emit display_heading_sig(heading);
+    }
+    else {
+        qInfo() << "Rotor dead end";
+    }
 }
 
 

@@ -15,9 +15,9 @@ intptr_t handle;
 
 Rotor::Rotor()
 {
-    qInfo() << "init rotor";
+
     int res = usb_relay_init();
-    qInfo() << "init" << res;
+
     if (res == 0){
        bool found = initBoard();
        if (!found){
@@ -57,7 +57,7 @@ bool Rotor::initBoard(){
  * @return command result 0 = success 1 = error
  */
 qint8 Rotor::rotate(int direction, int rotate){
-    qInfo() << "Relay:" << direction << rotate;
+    //qInfo() << "Relay:" << direction << rotate;
     int result = 0;
     if (rotate == ROTATE_ON){
         result = usb_relay_device_open_one_relay_channel(handle,direction);

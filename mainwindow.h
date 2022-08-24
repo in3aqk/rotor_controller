@@ -1,7 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-
+#include "config.h"
 #include <QMainWindow>
 #include <QDebug>
 #include <QSettings>
@@ -30,7 +30,7 @@ private:
     Rotor rotor;
     RotorTimer rotorTimer;
 
-    QSettings settings;
+
     Ui::MainWindow *ui;
     void initAll();
     void allOff();
@@ -39,9 +39,20 @@ private:
     void cwRelease();
     void ccwPress();
     void ccwRelease();
+    void stop();
+    void set();
+    void reset();
+    void set360();
+    void set45();
+    void set90();
+    void set135();
+    void set180();
+    void set225();
+    void set270();
+    void set315();
     void saveLastPosition();
     int rotation_time;
-    int last_position;
+    float last_position;
     int isCalibrated;
 
 public slots:

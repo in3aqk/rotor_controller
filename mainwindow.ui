@@ -83,6 +83,167 @@
      <string>&lt;&lt;&lt;</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="btnGo">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>360</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Set</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn180">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>460</y>
+      <width>40</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>180</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn90">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>310</y>
+      <width>40</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>90</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn360">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>180</y>
+      <width>40</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>360</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn270">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>300</y>
+      <width>40</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>270</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn45">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>220</y>
+      <width>40</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>45</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn135">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>410</y>
+      <width>40</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>135</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn225">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>400</y>
+      <width>40</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>225</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn315">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>227</y>
+      <width>40</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>315</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnStop">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>260</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Stop</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="txtPreset">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>300</y>
+      <width>113</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>40</pointsize>
+     </font>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnReset">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>520</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>reset</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

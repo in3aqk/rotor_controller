@@ -3,4 +3,6 @@
 
 //Here the config
 
+#define dbg(m) qDebug() << m
+
 #endif // CONFIG_H

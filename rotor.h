@@ -1,6 +1,7 @@
 #ifndef ROTOR_H
 #define ROTOR_H
 
+#include "config.h"
 #include "defines.h"
 #include <qglobal.h>
 
