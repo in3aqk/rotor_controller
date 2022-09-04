@@ -10,10 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     setEvents();
-
-
     initAll();
-
 
 }
 
@@ -80,7 +77,7 @@ void MainWindow::setEvents()
     connect(ui->btn180, &QPushButton::released, this, &MainWindow::set180);
     connect(ui->btn225, &QPushButton::released, this, &MainWindow::set225);
     connect(ui->btn270, &QPushButton::released, this, &MainWindow::set270);
-    connect(ui->btn315, &QPushButton::released, this, &MainWindow::set135);
+    connect(ui->btn315, &QPushButton::released, this, &MainWindow::set315);
 
 
     connect(&rotorTimer, SIGNAL(display_heading_sig(qfloat16)), this, SLOT(display_heading_slot(qfloat16)));
@@ -93,6 +90,7 @@ void MainWindow::cwPress()
     rotor.rotate(DIRECTION_CW,ROTATE_ON);
     rotor.rotate(DIRECTION_CCW,ROTATE_OFF);
     rotorTimer.timerGo(DIRECTION_CW);
+    rotorTimer.rotationType = ROTATION_FREE;
 
 }
 void MainWindow::cwRelease()
@@ -102,6 +100,7 @@ void MainWindow::cwRelease()
     rotor.rotate(DIRECTION_CCW,ROTATE_OFF);
     rotorTimer.timerStop();
     saveLastPosition();
+    rotorTimer.rotationType = ROTATION_UNSET;
 }
 
 void MainWindow::ccwPress()
@@ -110,6 +109,7 @@ void MainWindow::ccwPress()
     rotor.rotate(DIRECTION_CCW,ROTATE_ON);
     rotor.rotate(DIRECTION_CW,ROTATE_OFF);
     rotorTimer.timerGo(DIRECTION_CCW);
+    rotorTimer.rotationType = ROTATION_FREE;
 }
 void MainWindow::ccwRelease()
 {
@@ -118,58 +118,68 @@ void MainWindow::ccwRelease()
     rotor.rotate(DIRECTION_CW,ROTATE_OFF);
     rotorTimer.timerStop();
     saveLastPosition();
+    rotorTimer.rotationType = ROTATION_UNSET;
 }
 
 void MainWindow::stop(){
-
+    rotorTimer.rotationType = ROTATION_UNSET;
+    rotorTimer.timerStop();
+    rotor.stop();
 }
 
 void MainWindow::set(){
-
+    rotorTimer.rotationType = ROTATION_PRESET;
 }
 
 void MainWindow::reset(){
-
+    rotorTimer.rotationType = ROTATION_UNSET;
+    ui->txtPreset->setText("000");
+    ui->lcdAzimut->display(0);
+    rotorTimer.timerStop();
+    rotorTimer.heading = 0;
+    rotorTimer.preset_heading = 0;
+    rotor.stop();
 }
 
+void MainWindow::setCardinal(uint heading){
+    ui->txtPreset->setText(QString::number(heading));
+    rotorTimer.preset_heading = heading;
+    rotorTimer.rotationType = ROTATION_PRESET;
+    rotorTimer.timerGoPreset();
+}
+
+
+
 void MainWindow::set360(){
-    ui->txtPreset->setText("360");
-    rotorTimer.preset_heading = 360;
+    setCardinal(360);
 }
 
 void MainWindow::set45(){
-    ui->txtPreset->setText("045");
-    rotorTimer.preset_heading = 45;
+    setCardinal(45);
 }
 
 void MainWindow::set90(){
-    ui->txtPreset->setText("090");
-    rotorTimer.preset_heading = 90;
+    setCardinal(90);
 }
 
 void MainWindow::set135(){
-    ui->txtPreset->setText("135");
-    rotorTimer.preset_heading = 135;
+    setCardinal(135);
 }
 
 void MainWindow::set180(){
-    ui->txtPreset->setText("180");
-    rotorTimer.preset_heading = 180;
+    setCardinal(180);
 }
 
 void MainWindow::set225(){
-    ui->txtPreset->setText("225");
-    rotorTimer.preset_heading = 225;
+    setCardinal(225);
 }
 
 void MainWindow::set270(){
-    ui->txtPreset->setText("270");
-    rotorTimer.preset_heading = 270;
+    setCardinal(270);
 }
 
 void MainWindow::set315(){
-    ui->txtPreset->setText("315");
-    rotorTimer.preset_heading = 315;
+    setCardinal(315);
 }
 
 

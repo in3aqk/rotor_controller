@@ -16,6 +16,7 @@ class Rotor
 public:
     Rotor();
     qint8 rotate(int direction, int rotate);
+    void stop();
 
 protected:
 

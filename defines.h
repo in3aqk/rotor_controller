@@ -13,5 +13,9 @@
 #define DIRECTION_CCW 2
 #define ROTATE_OFF 0
 #define ROTATE_ON 1
+#define ROTATION_UNSET 0 // Rotate type not set
+#define ROTATION_FREE 1 // Rotate by buttons
+#define ROTATION_PRESET 2 // Rotate by preset headings
+
 
 #endif // DEFINES_H

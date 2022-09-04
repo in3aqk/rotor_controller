@@ -38,23 +38,56 @@ void RotorTimer::timerGo(qint16 direction){
 
 }
 
+void RotorTimer::timerGoPreset(){
+    if(heading < preset_heading){
+        directionSign = 1;
+    } else{
+        directionSign = -1;
+    }
+    // msec
+    timer->start(rate);
+}
+
+
 void RotorTimer::timerStop(){
     timer->stop();
 }
 
 
 void RotorTimer::rotationTimerSlot(){
+    if (rotationType == ROTATION_FREE) {
+        if (heading < 360 && directionSign == 1){
 
-    if (heading < 360 && directionSign == 1){
-        heading = heading + directionSign;
-        emit display_heading_sig(heading);
+            heading = heading + directionSign;
+            emit display_heading_sig(heading);
+        }
+        else if (heading > 0 && directionSign == -1){
+            heading = heading + directionSign;
+            emit display_heading_sig(heading);
+        }
+        else {
+            qInfo() << "Rotor dead end";
+        }
     }
-    else if (heading > 0 && directionSign == -1){
-        heading = heading + directionSign;
-        emit display_heading_sig(heading);
-    }
-    else {
-        qInfo() << "Rotor dead end";
+    if (rotationType == ROTATION_PRESET) {
+        if (heading < 360 && directionSign == 1 && heading < preset_heading){
+            rotor.rotate(DIRECTION_CW,ROTATE_ON);
+            rotor.rotate(DIRECTION_CCW,ROTATE_OFF);
+            heading = heading + directionSign;
+            emit display_heading_sig(heading);
+        }
+        else if (heading > 0 && directionSign == -1 && heading > preset_heading){
+            rotor.rotate(DIRECTION_CCW,ROTATE_ON);
+            rotor.rotate(DIRECTION_CW,ROTATE_OFF);
+            heading = heading + directionSign;
+            emit display_heading_sig(heading);            
+        }
+        else {
+            rotor.rotate(DIRECTION_CW,ROTATE_OFF);
+            rotor.rotate(DIRECTION_CCW,ROTATE_OFF);
+            timerStop();
+            qInfo() << "Preset reached";
+        }
     }
 }
 

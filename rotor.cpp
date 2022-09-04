@@ -69,4 +69,8 @@ qint8 Rotor::rotate(int direction, int rotate){
     return result;
 }
 
+void Rotor::stop(){
+ usb_relay_device_close_one_relay_channel(handle,DIRECTION_CCW);
+ usb_relay_device_close_one_relay_channel(handle,DIRECTION_CW);
+}
 

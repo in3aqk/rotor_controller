@@ -42,6 +42,7 @@ private:
     void stop();
     void set();
     void reset();
+    void setCardinal(uint);
     void set360();
     void set45();
     void set90();
