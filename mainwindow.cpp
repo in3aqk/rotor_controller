@@ -51,6 +51,9 @@ void MainWindow::initAll(){
     rotorTimer.heading = last_position;
     rotor.rotate(DIRECTION_CW,ROTATE_OFF);
     rotor.rotate(DIRECTION_CCW,ROTATE_OFF);
+    ui->txtPreset->setMaxLength(3);
+    ui->txtPreset->setInputMask("999");
+    ui->txtPreset->setText("000");
 
 }
 
@@ -128,7 +131,14 @@ void MainWindow::stop(){
 }
 
 void MainWindow::set(){
-    rotorTimer.rotationType = ROTATION_PRESET;
+    QString presetTxt = ui->txtPreset->text();
+    qint16 preset = presetTxt.toInt();
+    if (preset <= 360) {
+        setCardinal(preset);
+    } else {
+        ui->txtPreset->setText("000");
+    }
+
 }
 
 void MainWindow::reset(){

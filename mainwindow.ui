@@ -227,8 +227,14 @@
       <pointsize>40</pointsize>
      </font>
     </property>
+    <property name="inputMask">
+     <string extracomment="Only numbers"/>
+    </property>
     <property name="text">
-     <string>000</string>
+     <string/>
+    </property>
+    <property name="maxLength">
+     <number>32767</number>
     </property>
     <property name="alignment">
      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
